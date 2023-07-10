@@ -81,7 +81,7 @@ resource "google_container_node_pool" "app_cluster_linux_node_pool" {
 
   node_config {
     preemptible  = true
-    disk_size_gb = 1000
+    disk_size_gb = 100
 
     service_account = var.service_account
     oauth_scopes = [
@@ -122,16 +122,16 @@ resource "google_container_node_pool" "app_cluster_linux_node_pool" {
 
 
 
-resource "google_container_node_pool" "app_cluster_linux_node_pool1" {
-  name           = "${google_container_cluster.app_cluster.name}--linux-node-pool1"
+resource "google_container_node_pool" "app_cluster_linux_node_pool2" {
+  name           = "${google_container_cluster.app_cluster.name}--linux-node-pool2"
   location       = google_container_cluster.app_cluster.location
   node_locations = var.node_zones
   cluster        = google_container_cluster.app_cluster.name
-  node_count     = 20
+  node_count     = 10
 
   autoscaling {
-    max_node_count = 10 
-    min_node_count = 100
+    max_node_count = 100
+    min_node_count = 10
   }
   max_pods_per_node = 50
 
@@ -142,7 +142,7 @@ resource "google_container_node_pool" "app_cluster_linux_node_pool1" {
 
   node_config {
     preemptible  = true
-    disk_size_gb = 1000
+    disk_size_gb = 100
 
     service_account = var.service_account
     oauth_scopes = [
