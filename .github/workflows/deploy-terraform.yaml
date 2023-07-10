@@ -57,7 +57,7 @@ jobs:
         uses: dflook/terraform-destroy@v1
         with:
           path: ./test/terraform
-          workspace: ${{ github.ref }}
+          workspace: ${{ github.head_ref }}
 
       - name: Terraform Init
         id: tf_init
