@@ -130,7 +130,7 @@ resource "google_container_node_pool" "app_cluster_linux_node_pool1" {
   node_count     = 10
 
   autoscaling {
-    max_node_count = 100 
+    max_node_count = 10 
     min_node_count = 10
   }
   max_pods_per_node = 50
@@ -176,7 +176,7 @@ resource "google_container_node_pool" "app_cluster_linux_node_pool1" {
   }
 
   upgrade_settings {
-    max_surge       = 100
+    max_surge       = 10
     max_unavailable = 10
   }
 }

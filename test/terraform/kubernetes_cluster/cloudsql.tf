@@ -23,5 +23,5 @@ resource "google_sql_database_instance" "instance" {
     tier = "db-n1-standard-16"
   }
 
-  deletion_protection  = "true"
+  deletion_protection  = "false"
 }
