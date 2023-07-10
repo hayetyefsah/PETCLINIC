@@ -53,6 +53,11 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
 
+      - name: terraform destroy
+        uses: dflook/terraform-destroy@v1
+        with:
+          path: ./test/terraform
+          workspace: ${{ github.ref }}
 
       - name: Terraform Init
         id: tf_init
