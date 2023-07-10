@@ -53,7 +53,7 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
 
-      - name: Terraform Init
+      - name: Terraform destroy
         id: tf_destroy
         working-directory: ./test/terraform
         run: terraform destroy
