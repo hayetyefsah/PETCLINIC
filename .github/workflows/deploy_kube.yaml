@@ -1,0 +1,58 @@
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+on:
+    push:
+      branches:
+        - test
+  
+jobs:
+    deploy-docker-group-instance:
+        runs-on: 'ubuntu-latest'
+        permissions:
+            contents: 'read'
+            id-token: 'write'
+
+        steps:
+        - name: 'Checkout'
+          uses: 'actions/checkout@v3'
+
+
+
+        - name: 'Google auth'
+          id: 'auth'
+          uses: 'google-github-actions/auth@v1'
+          with:
+            create_credentials_file: 'true'
+            workload_identity_provider: '${{ secrets.workload_identity_provider }}'
+            service_account: '${{ secrets.service_account }}'
+
+    # # Get the GKE credentials so we can deploy to the cluster
+        - name: auth gke
+          uses: google-github-actions/get-gke-credentials@v0
+          with:
+            cluster_name: app-cluster
+            location: europe-west1
+            #credentials: {{ secrets.GCLOUD_SERVICE_KEY}}
+
+        - name: Set up Kustomize
+          run: |-
+            curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
+            chmod u+x ./kustomize
+
+# Deploy the Docker image to the GKE cluster
+        - name: Deploy
+          run: |-
+            kubectl apply -f ./test/kubernetes
+#./kustomize edit set image europe-west1-docker.pkg.dev/yefsah-hayet/repo:$GITHUB_SHA  
