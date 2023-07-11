@@ -18,16 +18,10 @@ spec:
       labels:
         service: tracing-server
     spec:
+      imagePullSecrets:
+        - name: gcr-json-key 
       containers:
       - command:
-        - ./wait-for-it.sh
-        - discovery-server:8761
-        - --timeout=60
-        - --
-        - java
-        - -Djava.security.egd=file:/dev/./urandom
-        - -jar
-        - /app.jar
         image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/openzipkin/zipkin:latest
         name: tracing-server
         ports:

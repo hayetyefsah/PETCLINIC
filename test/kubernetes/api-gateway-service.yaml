@@ -6,6 +6,7 @@ metadata:
     service: api-gateway
   name: api-gateway
 spec:
+  type: LoadBalancer
   ports:
   - name: "8080"
     port: 8080
