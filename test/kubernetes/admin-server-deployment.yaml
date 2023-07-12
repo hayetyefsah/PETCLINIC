@@ -20,11 +20,39 @@ spec:
       imagePullSecrets:
         - name: gcr-json-key  
       containers:
-      - command:
+    
+      - name: admin-server
         image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/springcommunity/spring-petclinic-admin-server:latest
-        name: admin-server
+        command:
+          - ./dockerize
+          - -wait=tcp://discovery-server:8761
+          - -timeout=60s
+          - --
+          - java
+          - org.springframework.boot.loader.JarLauncher
+        env: 
+        - name: SPRING_PROFILES_ACTIVE
+          value: docker,mysql
         ports:
         - containerPort: 9090
         resources: {}
       restartPolicy: Always
 status: {}
+
+ 
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: api-gateway
+spec:
+  maxReplicas: 7
+  minReplicas: 3
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: api-gateway
+  targetCPUUtilizationPercentage: 75
+status:
+  currentReplicas: 5
+  desiredReplicas: 3

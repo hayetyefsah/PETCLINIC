@@ -22,8 +22,30 @@ spec:
       containers:
       - image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/springcommunity/spring-petclinic-config-server:latest
         name: config-server
+        env:
+        - name: spring.datasource.url
+          value: "jdbc:mysql://root@db:3306/petclinic"
+       # - name: spring.data.driver
         ports:
         - containerPort: 8888
         resources: {}
       restartPolicy: Always
 status: {}
+
+ 
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: config-server
+spec:
+  maxReplicas: 7
+  minReplicas: 3
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: config-server
+  targetCPUUtilizationPercentage: 75
+status:
+  currentReplicas: 5
+  desiredReplicas: 3
