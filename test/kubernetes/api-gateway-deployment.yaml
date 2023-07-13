@@ -21,7 +21,7 @@ spec:
           - name: gcr-json-key 
       containers:
       - name: api-gateway
-        image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/springcommunity/spring-petclinic-api-gateway:preprod
+        image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/springcommunity/spring-petclinic-api-gateway:prod
         command:
           - ./dockerize
           - -wait=tcp://discovery-server:8761

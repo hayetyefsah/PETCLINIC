@@ -23,7 +23,7 @@ spec:
       
   
       - name: vets-service
-        image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/springcommunity/spring-petclinic-vets-service:preprod
+        image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/springcommunity/spring-petclinic-vets-service:prod
         command:
           - ./dockerize
           - -wait=tcp://discovery-server:8761

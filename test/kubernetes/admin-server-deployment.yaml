@@ -22,7 +22,7 @@ spec:
       containers:
     
       - name: admin-server
-        image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/springcommunity/spring-petclinic-admin-server:preprod
+        image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/springcommunity/spring-petclinic-admin-server:prod
         command:
           - ./dockerize
           - -wait=tcp://discovery-server:8761

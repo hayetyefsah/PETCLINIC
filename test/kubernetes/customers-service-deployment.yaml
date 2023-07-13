@@ -25,7 +25,7 @@ spec:
       containers:
     
       - name: customers-service
-        image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/springcommunity/spring-petclinic-customers-service:preprod
+        image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/springcommunity/spring-petclinic-customers-service:prod
         command:
           - ./dockerize
           - -wait=tcp://discovery-server:8761
