@@ -52,7 +52,8 @@ jobs:
 # Deploy the Docker image to the GKE cluster
         - name: Deploy
           run: |-
-            kubectl create namespace preprod
+
             kubectl config set-context --current --namespace=preprod
             kubectl apply -f ./test/kubernetes
 #./kustomize edit set image europe-west1-docker.pkg.dev/yefsah-hayet/repo:$GITHUB_SHA  
+#kubectl create namespace preprod
