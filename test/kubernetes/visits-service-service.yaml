@@ -7,7 +7,6 @@ metadata:
     service: visits-service
   name: visits-service
 spec:
-  type: LoadBalancer
   ports:
   - name: "8082"
     port: 8082

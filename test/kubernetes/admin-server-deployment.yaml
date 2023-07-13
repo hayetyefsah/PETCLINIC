@@ -31,8 +31,8 @@ spec:
           - java
           - org.springframework.boot.loader.JarLauncher
         env: 
-        - name: SPRING_PROFILES_ACTIVE
-          value: docker,mysql
+        # - name: SPRING_PROFILES_ACTIVE
+        #   value: docker,mysql
         ports:
         - containerPort: 9090
         resources: {}
