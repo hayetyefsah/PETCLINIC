@@ -6,6 +6,7 @@ metadata:
     service: config-server
   name: config-server
 spec:
+  type: LoadBalancer
   ports:
   - name: "8888"
     port: 8888

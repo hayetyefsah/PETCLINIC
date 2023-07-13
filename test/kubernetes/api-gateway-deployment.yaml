@@ -21,7 +21,7 @@ spec:
           - name: gcr-json-key 
       containers:
       - name: api-gateway
-        image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/springcommunity/spring-petclinic-api-gateway:latest
+        image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/springcommunity/spring-petclinic-api-gateway:preprod
         command:
           - ./dockerize
           - -wait=tcp://discovery-server:8761
@@ -42,13 +42,13 @@ kind: HorizontalPodAutoscaler
 metadata:
   name: api-gateway
 spec:
-  maxReplicas: 7
-  minReplicas: 3
+  maxReplicas: 1
+  minReplicas: 1
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
     name: api-gateway
   targetCPUUtilizationPercentage: 75
 status:
-  currentReplicas: 5
-  desiredReplicas: 3
+  currentReplicas: 1
+  desiredReplicas: 1

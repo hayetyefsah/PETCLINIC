@@ -23,7 +23,7 @@ spec:
       containers:
       - name: discovery-server
 
-        image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/springcommunity/spring-petclinic-discovery-server:latest
+        image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/springcommunity/spring-petclinic-discovery-server:preprod
         command:
           - ./dockerize
           - -wait=tcp://config-server:8888

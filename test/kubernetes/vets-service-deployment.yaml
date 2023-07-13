@@ -23,7 +23,7 @@ spec:
       
   
       - name: vets-service
-        image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/springcommunity/spring-petclinic-vets-service:latest
+        image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/springcommunity/spring-petclinic-vets-service:preprod
         command:
           - ./dockerize
           - -wait=tcp://discovery-server:8761
@@ -66,20 +66,23 @@ spec:
 #         securityContext:
               
 #           runAsNonRoot: true
-#         volumeMounts:
-#         - name: sa-volume
-#           mountPath: /secrets/
-#           readOnly: true
+        # volumeMounts:
+        # - name: config
+        #   mountPath: /application/application.yml
+        #   subPath: "application.yml"
 #         # resources:
 #         #   requests:
             
 #         #     memory: "2Gi"
           
 #         #     cpu:    "1"
-#       volumes:
-#       - name: sa-volume
-#         secret:
-#           secretName: sa-db
+      volumes:
+      - name: config
+        configMap:
+          name:  vets-service
+          
+
+
       
 
       restartPolicy: Always
@@ -92,13 +95,13 @@ kind: HorizontalPodAutoscaler
 metadata:
   name: vets-service
 spec:
-  maxReplicas: 7
-  minReplicas: 3
+  maxReplicas: 1
+  minReplicas: 1
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
     name: vets-service
   targetCPUUtilizationPercentage: 75
 status:
-  currentReplicas: 5
-  desiredReplicas: 3
+  currentReplicas: 1
+  desiredReplicas: 1

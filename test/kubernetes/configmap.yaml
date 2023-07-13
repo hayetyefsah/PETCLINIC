@@ -1,0 +1,10 @@
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: vets-service
+# data:
+#   application.yml: |
+#     eureka: 
+#       instance: 
+#         # enable to register multiple app instances with a random server port
+#         hostname: "vets-service" # ${spring.application.name}:${random.uuid}
